@@ -1,51 +1,45 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
-import "./App.css";
+/**
+ * @fileoverview App root — handles routing between the companion window
+ * and the settings window based on URL path.
+ *
+ * Tauri opens:
+ *   - devUrl "/"          → CompanionWindow
+ *   - devUrl "/settings"  → SettingsWindow
+ */
 
-function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+import React, { useEffect } from "react";
+import CompanionWindow from "./windows/companion/CompanionWindow";
+import SettingsWindow from "./windows/settings/SettingsWindow";
+import { useSettingsStore } from "./store/settings";
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
+const App: React.FC = () => {
+  const { hydrate } = useSettingsStore();
+  const path = window.location.pathname;
+
+  // Hydrate settings from tauri-plugin-store on mount
+  useEffect(() => {
+    // Try loading persisted settings from the store plugin
+    // On first launch this returns the defaults written in Rust
+    import("@tauri-apps/plugin-store").then(({ load }) => {
+      load("settings.json").then((store) => {
+        store.entries().then((entries) => {
+          const stored = Object.fromEntries(entries);
+          if (Object.keys(stored).length > 0) {
+            hydrate(stored as Parameters<typeof hydrate>[0]);
+          } else {
+            // Mark as hydrated with defaults
+            hydrate({});
+          }
+        }).catch(() => hydrate({}));
+      }).catch(() => hydrate({}));
+    }).catch(() => hydrate({}));
+  }, [hydrate]);
+
+  if (path === "/settings") {
+    return <SettingsWindow />;
   }
 
-  return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
-
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-    </main>
-  );
-}
+  return <CompanionWindow />;
+};
 
 export default App;
