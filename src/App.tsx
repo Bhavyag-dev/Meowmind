@@ -1,20 +1,16 @@
-/**
- * @fileoverview App root — handles routing between the companion window
- * and the settings window based on URL path.
- *
- * Tauri opens:
- *   - devUrl "/"          → CompanionWindow
- *   - devUrl "/settings"  → SettingsWindow
- */
-
 import React, { useEffect } from "react";
 import CompanionWindow from "./windows/companion/CompanionWindow";
 import SettingsWindow from "./windows/settings/SettingsWindow";
+import ByteWebsite from "./windows/website/ByteWebsite";
 import { useSettingsStore } from "./store/settings";
 
 const App: React.FC = () => {
   const { hydrate } = useSettingsStore();
   const path = window.location.pathname;
+  const isTauriCompanion =
+    typeof window !== "undefined" &&
+    Boolean((window as unknown as { __TAURI_INTERNALS__?: unknown }).__TAURI_INTERNALS__) &&
+    path === "/";
 
   // Hydrate settings from tauri-plugin-store on mount
   useEffect(() => {
@@ -39,7 +35,11 @@ const App: React.FC = () => {
     return <SettingsWindow />;
   }
 
-  return <CompanionWindow />;
+  if (path === "/companion" || isTauriCompanion) {
+    return <CompanionWindow />;
+  }
+
+  return <ByteWebsite />;
 };
 
 export default App;

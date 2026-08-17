@@ -77,19 +77,28 @@
    -------------------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body, #root {
-  height: 100%;
+html, body {
+  min-height: 100%;
   width: 100%;
-  overflow: hidden;
+}
+
+#root {
+  min-height: 100%;
+  width: 100%;
 }
 
 body {
   font-family: var(--font-sans);
   font-size: var(--text-base);
   color: var(--color-text-primary);
-  background: transparent;
+  background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body:has(.companion-window) {
+  background: transparent;
+  overflow: hidden;
 }
 
 /* --------------------------------------------------------------------------
@@ -111,134 +120,6 @@ body {
 
 .companion-window:active {
   cursor: grabbing;
-}
-
-/* CodeMon Speech Bubble with Tail */
-.codemon-bubble {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
-  padding: 8px 18px;
-  border-radius: var(--radius-full);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 2px 0px rgba(0, 0, 0, 0.6);
-  margin-bottom: 8px;
-  animation: float-bubble 2.5s ease-in-out infinite alternate;
-  border: 2px solid #000;
-  transition: all var(--transition-fast);
-  cursor: pointer;
-  z-index: 10;
-}
-
-.codemon-bubble:hover {
-  transform: scale(1.05);
-}
-
-.bubble-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 8px #22c55e;
-  animation: pulse-indicator 1.2s infinite ease-in-out;
-}
-
-@keyframes pulse-indicator {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(1.3); }
-}
-
-.codemon-bubble--idle {
-  background: #ffffff;
-  color: #1a1a1a;
-}
-.codemon-bubble--idle .bubble-indicator {
-  background: #7c5cff;
-  box-shadow: 0 0 8px #7c5cff;
-}
-
-.codemon-bubble--working {
-  background: linear-gradient(135deg, #ffeb3b, #fbc02d);
-  color: #1a1a1a;
-  border-color: #000;
-  box-shadow: 0 8px 24px rgba(251, 192, 45, 0.4);
-}
-.codemon-bubble--working .bubble-indicator {
-  background: #e65100;
-  box-shadow: 0 0 10px #e65100;
-}
-
-.codemon-bubble--needs_input {
-  background: #b39ddb;
-  color: #1a1a1a;
-  border-color: #000;
-}
-
-.codemon-bubble--done {
-  background: linear-gradient(135deg, #81c784, #4caf50);
-  color: #000000;
-  border-color: #000;
-  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.4);
-}
-.codemon-bubble--done .bubble-indicator {
-  background: #1b5e20;
-  box-shadow: 0 0 8px #1b5e20;
-}
-
-.codemon-bubble--falling {
-  background: #ff7043;
-  color: #ffffff;
-  border-color: #000;
-}
-
-.codemon-bubble--error {
-  background: #ef5350;
-  color: #ffffff;
-  border-color: #000;
-}
-
-.bubble-tail {
-  position: absolute;
-  bottom: -7px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 12px;
-  height: 12px;
-  background: inherit;
-  border-right: 2px solid #000;
-  border-bottom: 2px solid #000;
-}
-
-@keyframes float-bubble {
-  from { transform: translateY(0px); }
-  to   { transform: translateY(-4px); }
-}
-
-/* Floating Love Hearts */
-.floating-heart {
-  position: fixed;
-  pointer-events: none;
-  font-size: 20px;
-  animation: float-up-fade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  z-index: 100;
-}
-
-@keyframes float-up-fade {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(0.6) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-35px) scale(1.3) rotate(12deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-70px) scale(1) rotate(-10deg);
-  }
 }
 
 .companion-window__character {
@@ -272,60 +153,6 @@ body {
 .companion-window--dragging .companion-window__character {
   transform: scale(0.96) rotate(-3deg);
   filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.6));
-}
-
-/* Pet Quick-Action Bar */
-.pet-action-bar {
-  position: absolute;
-  bottom: -6px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(18, 22, 34, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-full);
-  padding: 4px 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 12px rgba(124, 92, 255, 0.3);
-  opacity: 0;
-  transform: translateY(10px) scale(0.9);
-  transition: opacity 0.2s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1);
-  pointer-events: none;
-  z-index: 50;
-}
-
-.companion-window__character:hover .pet-action-bar,
-.pet-action-bar:hover {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
-
-.pet-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  color: #fff;
-}
-
-.pet-btn:hover {
-  background: var(--color-accent);
-  transform: scale(1.18);
-  box-shadow: 0 0 10px var(--color-accent-glow);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.pet-btn:active {
-  transform: scale(0.95);
 }
 
 /* Ensure all interactive controls are non-drag regions */
