@@ -1,0 +1,69 @@
+{
+  "$schema": "./frame-map-schema.json",
+  "frameWidth": 128,
+  "frameHeight": 128,
+  "attribution": {
+    "author": "Ozzbit Games",
+    "asset": "Fantasy Character Animation Action Platformer (Free Version)",
+    "license": "Personal / non-commercial use only. Credits required.",
+    "url": "https://ozzbit-games.itch.io"
+  },
+  "states": {
+    "Idle": {
+      "sheet": "sheets/idle.png",
+      "frameCount": 10,
+      "fps": 10,
+      "loop": true,
+      "oneShot": false
+    },
+    "Run": {
+      "sheet": "sheets/run.png",
+      "frameCount": 10,
+      "fps": 12,
+      "loop": true,
+      "oneShot": false
+    },
+    "Walk": {
+      "sheet": "sheets/walk.png",
+      "frameCount": 10,
+      "fps": 8,
+      "loop": true,
+      "oneShot": false
+    },
+    "Jump": {
+      "sheet": "sheets/jump.png",
+      "frameCount": 6,
+      "fps": 10,
+      "loop": false,
+      "oneShot": true
+    },
+    "Fall": {
+      "sheet": "sheets/fall.png",
+      "frameCount": 4,
+      "fps": 10,
+      "loop": false,
+      "oneShot": true
+    },
+    "FallLoop": {
+      "sheet": "sheets/fall_loop.png",
+      "frameCount": 3,
+      "fps": 10,
+      "loop": true,
+      "oneShot": false
+    },
+    "Combo1": {
+      "sheet": "sheets/combo_1.png",
+      "frameCount": 3,
+      "fps": 12,
+      "loop": false,
+      "oneShot": true
+    },
+    "Combo1End": {
+      "sheet": "sheets/combo_1_end.png",
+      "frameCount": 4,
+      "fps": 10,
+      "loop": false,
+      "oneShot": true
+    }
+  }
+}
