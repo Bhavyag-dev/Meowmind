@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "tauri-app",
+  "productName": "Meowmind",
   "version": "0.1.0",
   "identifier": "com.meowmind.app",
   "build": {
@@ -10,13 +10,45 @@
     "frontendDist": "../dist"
   },
   "app": {
+    "macOSPrivateApi": true,
     "windows": [
       {
-        "title": "tauri-app",
-        "width": 800,
-        "height": 600
+        "label": "companion",
+        "title": "Meowmind",
+        "url": "/",
+        "width": 380,
+        "height": 450,
+        "minWidth": 250,
+        "minHeight": 250,
+        "resizable": true,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": false,
+        "visible": true
+      },
+      {
+        "label": "settings",
+        "title": "Meowmind Settings",
+        "url": "/settings",
+        "width": 600,
+        "height": 700,
+        "minWidth": 500,
+        "minHeight": 600,
+        "resizable": true,
+        "decorations": true,
+        "transparent": false,
+        "alwaysOnTop": false,
+        "skipTaskbar": false,
+        "visible": false
       }
     ],
+    "trayIcon": {
+      "id": "meowmind-tray",
+      "iconPath": "icons/32x32.png",
+      "tooltip": "Meowmind"
+    },
     "security": {
       "csp": null
     }
@@ -30,6 +62,15 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "macOS": {
+      "minimumSystemVersion": "11.0",
+      "frameworks": []
+    },
+    "windows": {
+      "nsis": {
+        "installMode": "perMachine"
+      }
+    }
   }
 }
