@@ -5,9 +5,8 @@
  * All types are validated at runtime using Zod schemas defined in schemas.ts.
  */
 
-// ---------------------------------------------------------------------------
 // AI
-// ---------------------------------------------------------------------------
+
 
 /** Supported AI provider identifiers — must match Rust `Provider` enum. */
 export type Provider =
@@ -43,9 +42,8 @@ export interface ErrorEvent {
   message: string;
 }
 
-// ---------------------------------------------------------------------------
 // Chat Sessions
-// ---------------------------------------------------------------------------
+
 
 export interface Session {
   id: string;
@@ -64,9 +62,8 @@ export interface Message {
   createdAt: string;
 }
 
-// ---------------------------------------------------------------------------
 // Reminders
-// ---------------------------------------------------------------------------
+
 
 export interface Reminder {
   id: string;
@@ -85,9 +82,8 @@ export interface ReminderInput {
   recurrence?: string;
 }
 
-// ---------------------------------------------------------------------------
 // Notes
-// ---------------------------------------------------------------------------
+
 
 export interface Note {
   id: string;
@@ -104,9 +100,8 @@ export interface NoteInput {
   posY?: number;
 }
 
-// ---------------------------------------------------------------------------
 // Settings
-// ---------------------------------------------------------------------------
+
 
 export interface AppSettings {
   provider: Provider;
@@ -131,9 +126,8 @@ export const DEFAULT_SETTINGS: AppSettings = {
   characterSkin: "default",
 };
 
-// ---------------------------------------------------------------------------
 // Animation / Character
-// ---------------------------------------------------------------------------
+
 
 /** All animation states available from the Ozzbit Games sprite pack. */
 export type CharacterState =
@@ -172,9 +166,8 @@ export interface CompanionMovementState {
   maxY: number;
 }
 
-// ---------------------------------------------------------------------------
 // Anti-Gravity CLI companion activity
-// ---------------------------------------------------------------------------
+
 
 /**
  * Privacy-safe phases inferred from Anti-Gravity CLI lifecycle signals.

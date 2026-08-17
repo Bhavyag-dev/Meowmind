@@ -51,9 +51,7 @@ export class CharacterStateMachine {
     this.preloadImages();
   }
 
-  // ---------------------------------------------------------------------------
-  // Public API
-  // ---------------------------------------------------------------------------
+
 
   /** Start playing an animation state.
    *
@@ -98,9 +96,7 @@ export class CharacterStateMachine {
     return this.currentState;
   }
 
-  // ---------------------------------------------------------------------------
-  // Private
-  // ---------------------------------------------------------------------------
+
 
   private getStateMeta(state: CharacterState): FrameState | null {
     const s = this.frameMap.states[state as string];

@@ -13,9 +13,7 @@ import type { FrameMap } from "../../src/shared/schemas";
 
 (globalThis as unknown as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
-// ---------------------------------------------------------------------------
 // Test fixture: Full frame map with all available states
-// ---------------------------------------------------------------------------
 const MOCK_FRAME_MAP: FrameMap = {
   frameWidth: 128,
   frameHeight: 128,

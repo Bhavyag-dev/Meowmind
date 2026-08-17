@@ -144,9 +144,7 @@ export class MovementController {
     this.stop();
   }
 
-  // ---------------------------------------------------------------------------
-  // Private
-  // ---------------------------------------------------------------------------
+
 
   private startMovement(onArrival?: () => void): void {
     if (this.rafId !== null) {
@@ -185,9 +183,8 @@ export class MovementController {
   }
 }
 
-// ---------------------------------------------------------------------------
 // Unit-test helpers (exported for tests/animation/movement.test.ts)
-// ---------------------------------------------------------------------------
+
 
 /** Clamp a value within [min, max]. */
 export function clamp(value: number, min: number, max: number): number {

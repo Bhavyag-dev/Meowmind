@@ -5,9 +5,8 @@
 
 import { z } from "zod";
 
-// ---------------------------------------------------------------------------
 // AI
-// ---------------------------------------------------------------------------
+
 
 export const ProviderSchema = z.enum([
   "openai",
@@ -31,9 +30,8 @@ export const StreamParamsSchema = z.object({
   requestId: z.string().uuid(),
 });
 
-// ---------------------------------------------------------------------------
 // Reminders
-// ---------------------------------------------------------------------------
+
 
 export const ReminderSchema = z.object({
   id: z.string(),
@@ -52,9 +50,8 @@ export const ReminderInputSchema = z.object({
   recurrence: z.string().optional(),
 });
 
-// ---------------------------------------------------------------------------
 // Notes
-// ---------------------------------------------------------------------------
+
 
 export const NoteSchema = z.object({
   id: z.string(),
@@ -71,9 +68,8 @@ export const NoteInputSchema = z.object({
   posY: z.number().optional(),
 });
 
-// ---------------------------------------------------------------------------
 // Settings
-// ---------------------------------------------------------------------------
+
 
 export const AppSettingsSchema = z.object({
   provider: ProviderSchema,
@@ -96,9 +92,8 @@ export const CompanionMovementStateSchema = z.object({
   maxY: z.number().int(),
 });
 
-// ---------------------------------------------------------------------------
 // Anti-Gravity CLI companion activity
-// ---------------------------------------------------------------------------
+
 
 export const AntigravityActivityEventSchema = z.object({
   detected: z.boolean(),
@@ -117,9 +112,8 @@ export const AntigravityActivityEventSchema = z.object({
   historyUpdated: z.boolean(),
 });
 
-// ---------------------------------------------------------------------------
 // Frame Map (animation engine)
-// ---------------------------------------------------------------------------
+
 
 export const FrameStateSchema = z.object({
   sheet: z.string(),

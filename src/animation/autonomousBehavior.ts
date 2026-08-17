@@ -137,9 +137,7 @@ export class AutonomousBehaviorScheduler {
     this.options = { ...this.options, ...opts };
   }
 
-  // ---------------------------------------------------------------------------
-  // Private
-  // ---------------------------------------------------------------------------
+
 
   private scheduleNext(): void {
     if (!this.running) return;

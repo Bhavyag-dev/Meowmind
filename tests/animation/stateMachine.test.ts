@@ -7,9 +7,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { CharacterStateMachine } from "../../src/animation/stateMachine";
 import type { FrameMap } from "../../src/shared/schemas";
 
-// ---------------------------------------------------------------------------
 // Test fixture: minimal frame map with 2 states
-// ---------------------------------------------------------------------------
 const FRAME_MAP: FrameMap = {
   frameWidth: 128,
   frameHeight: 128,
@@ -21,9 +19,7 @@ const FRAME_MAP: FrameMap = {
   },
 };
 
-// ---------------------------------------------------------------------------
 // Mock canvas (jsdom's canvas doesn't support 2d by default)
-// ---------------------------------------------------------------------------
 const mockCtx = {
   clearRect: vi.fn(),
   drawImage: vi.fn(),
@@ -35,9 +31,7 @@ function createMockCanvas(): HTMLCanvasElement {
   return canvas;
 }
 
-// ---------------------------------------------------------------------------
 // Tests
-// ---------------------------------------------------------------------------
 describe("CharacterStateMachine", () => {
   let sm: CharacterStateMachine;
   let rafCallbacks: FrameRequestCallback[];
