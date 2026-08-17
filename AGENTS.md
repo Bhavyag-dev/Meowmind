@@ -79,6 +79,10 @@ tests/               — Vitest unit tests (animation, movement, time parser)
 - `CharacterStateMachine` is owned by `CharacterSprite` component
 - One-shot states (Jump, Fall, Combo*) call `onComplete` then auto-return to Idle
 
+### Commenting Style
+- **NEVER use bulky divider banners** (e.g. `// -----------------------` or `/* ====== */`).
+- Keep comments concise, natural, and minimal. Use standard single-line `//` or JSDoc/doc comments only where clarification is genuinely needed. No decorative ASCII dividers.
+
 ---
 
 ## Decisions Made
